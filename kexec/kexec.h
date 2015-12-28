@@ -279,7 +279,7 @@ extern void arch_reuse_initrd(void);
 
 extern int ifdown(void);
 
-extern char purgatory[];
+extern const char purgatory[];
 extern size_t purgatory_size;
 
 #define BOOTLOADER "kexec"
