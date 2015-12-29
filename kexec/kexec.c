@@ -1384,12 +1384,6 @@ int main(int argc, char *argv[])
 		    "\"--mem-max\" parameter\n");
 	}
 
-	if (do_load && (kexec_flags & KEXEC_HARDBOOT) && mem_min == 0) {
-		printf("Please specify memory range used by kexeced kernel\n");
-		printf("to avoid being overwritten by on reboot with the\n");
-		die("\"--min-max\" parameter\n");
-	}
-
 	fileind = optind;
 	/* Reset getopt for the next pass; called in other source modules */
 	opterr = 1;
