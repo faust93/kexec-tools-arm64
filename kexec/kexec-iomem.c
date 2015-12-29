@@ -44,7 +44,11 @@ int kexec_iomem_for_each_line(char *match,
 		die("Cannot open %s\n", iomem);
 
 	while(fgets(line, sizeof(line), fp) != 0) {
+#ifdef __ANDROID__
+		count = sscanf(line, "%llx-%llx : %n", &start, &end, &consumed);
+#else
 		count = sscanf(line, "%Lx-%Lx : %n", &start, &end, &consumed);
+#endif
 		if (count != 2)
 			continue;
 		str = line + consumed;
