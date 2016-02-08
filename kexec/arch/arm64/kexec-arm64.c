@@ -440,9 +440,15 @@ int arm64_load_other_segments(struct kexec_info *info,
 			 * booting.txt, align to 1 GiB.
 			 */
 
+#if 1
+			initrd_base = 0x02700000; // from lk/project/msm8994.mk
+			add_segment_phys_virt(info, initrd_buf,
+				initrd_size, initrd_base, initrd_size, 0);
+#else
 			initrd_base = add_buffer_phys_virt(info, initrd_buf,
 				initrd_size, initrd_size, GiB(1),
 				hole_min, hole_max, 1, 0);
+#endif
 
 			/* initrd_base is valid if we got here. */
 
@@ -472,14 +478,20 @@ int arm64_load_other_segments(struct kexec_info *info,
 		return -EFAILED;
 	}
 
+#if 1
+	dtb_base = 0x02500000; // from lk/project/msm8994.mk
+	add_segment_phys_virt(info, dtb.buf, dtb.size, dtb_base, dtb.size, 0);
+#else
 	dtb_base = add_buffer_phys_virt(info, dtb.buf, dtb.size, dtb.size,
 		0, hole_min, hole_max, 1, 0);
+#endif
 
 	/* dtb_base is valid if we got here. */
 
 	dbgprintf("dtb:    base %lx, size %lxh (%ld)\n", dtb_base, dtb.size,
 		dtb.size);
 
+#if 0
 	elf_rel_build_load(info, &info->rhdr, purgatory, purgatory_size,
 		hole_min, hole_max, 1, 0);
 
@@ -493,6 +505,8 @@ int arm64_load_other_segments(struct kexec_info *info,
 
 	elf_rel_set_symbol(&info->rhdr, "arm64_dtb_addr", &dtb_base,
 		sizeof(dtb_base));
+
+#endif
 
 	return 0;
 }
