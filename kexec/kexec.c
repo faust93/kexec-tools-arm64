@@ -50,6 +50,7 @@
 #include "kexec-zlib.h"
 #include "kexec-lzma.h"
 #include <arch/options.h>
+#include "../version.h"
 
 unsigned long long mem_min = 0;
 unsigned long long mem_max = ULONG_MAX;
@@ -1215,6 +1216,8 @@ int main(int argc, char *argv[])
 		{ 0, 0, 0, 0},
 	};
 	static const char short_options[] = KEXEC_ALL_OPT_STR;
+
+	printf("kexec version: " VERSION "\n");
 
 	/*
 	 * First check if --use-kexec-file-syscall is set. That changes lot of
