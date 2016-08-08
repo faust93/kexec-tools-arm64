@@ -18,5 +18,5 @@ $(UTIL_LIB): CPPFLAGS += -I$(srcdir)/util_lib/include
 
 $(UTIL_LIB): $(UTIL_LIB_OBJS)
 	@$(MKDIR) -p $(@D)
-	$(AR) rs $(UTIL_LIB) $(UTIL_LIB_OBJS)
+	$(AR) rs -c $(UTIL_LIB) $(UTIL_LIB_OBJS)
 
