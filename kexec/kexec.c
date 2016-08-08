@@ -349,6 +349,10 @@ void add_segment_phys_virt(struct kexec_info *info,
 			(void *)base, (void *)last);
 	}
 
+	dbgprintf("%s: %016lx - %016lx (%08lx) -> %016lx - %016lx (%08lx)\n",
+		__func__, (unsigned long)buf, (unsigned long)buf + bufsz, bufsz,
+		base, base + memsz, memsz);
+
 	size = (info->nr_segments + 1) * sizeof(info->segment[0]);
 	info->segment = xrealloc(info->segment, size);
 	info->segment[info->nr_segments].buf   = buf;
