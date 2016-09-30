@@ -25,8 +25,7 @@ int image_arm64_probe(const char *kernel_buf, off_t kernel_size)
 }
 
 int image_arm64_load(int argc, char **argv, const char *kernel_buf,
-	off_t kernel_size, const char *kernel_compressed_buf,
-	off_t kernel_compressed_size, struct kexec_info *info)
+	off_t kernel_size, struct kexec_info *info)
 {
 	const struct arm64_image_header *h;
 	unsigned long image_base;
@@ -50,8 +49,7 @@ int image_arm64_load(int argc, char **argv, const char *kernel_buf,
 	add_segment_phys_virt(info, kernel_buf, kernel_size, image_base,
 		arm64_mem.image_size, 0);
 
-	return arm64_load_other_segments(info, image_base,
-		kernel_compressed_buf, kernel_compressed_size);
+	return arm64_load_other_segments(info, image_base);
 }
 
 void image_arm64_usage(void)
