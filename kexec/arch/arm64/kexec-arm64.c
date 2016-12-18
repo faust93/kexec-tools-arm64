@@ -73,7 +73,7 @@ uint64_t get_vp_offset(void)
 int arm64_process_image_header(const struct arm64_image_header *h)
 {
 #if !defined(KERNEL_IMAGE_SIZE)
-# define KERNEL_IMAGE_SIZE MiB(16)
+# define KERNEL_IMAGE_SIZE MiB(18)
 #endif
 
 	if (!arm64_header_check_magic(h))
@@ -439,9 +439,8 @@ int arm64_load_other_segments(struct kexec_info *info,
 			 * Put the initrd after the kernel.  As specified in
 			 * booting.txt, align to 1 GiB.
 			 */
-
 #if 1
-			initrd_base = 0x02700000; // from lk/project/msm8994.mk
+			initrd_base = 0x42000000; // meizu pro5 specific
 			add_segment_phys_virt(info, initrd_buf,
 				initrd_size, initrd_base, initrd_size, 0);
 #else
@@ -478,7 +477,7 @@ int arm64_load_other_segments(struct kexec_info *info,
 		return -EFAILED;
 	}
 
-#if 1
+#if 0
 	dtb_base = 0x02500000; // from lk/project/msm8994.mk
 	add_segment_phys_virt(info, dtb.buf, dtb.size, dtb_base, dtb.size, 0);
 #else
